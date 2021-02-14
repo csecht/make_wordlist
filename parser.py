@@ -21,25 +21,36 @@ before running this script. Output is overwritten to now_parsed.txt.
 import re
 from pathlib import Path
 
-__version__ = 0.1
+__version__ = '0.1.1'
 
 text2parse_path = Path('parse_this.txt')
 parsed_words_path = Path('now_parsed.txt')
 
-text2parse = Path(text2parse_path).read_text()
-cleaned_strings = re.sub("[-:;.'!¡?¿*(){}/><]", ' ', text2parse).strip('"')
-parse_list = cleaned_strings.split()
 
-parsed_words = [word for word in parse_list if word.isalpha()]
-unique_parsed = set(parsed_words)
-subset_parsed = [word for word in unique_parsed if len(word) >= 3]
+def make_wordlist() -> None:
+    """
+    Create a wordlist text file of unique words from another text file.
 
-print(f'{len(parsed_words)} words in {text2parse_path}\n'
-      f'{len(unique_parsed)} unique words\n'
-      f'{len(subset_parsed)} unique with 3 or more letters in {parsed_words_path}'
-      )
+    :return: A utf-8, newline-delimited, text file.
+    """
+    text2parse = Path(text2parse_path).read_text()
+    cleaned_strings = re.sub("[-:;.'!¡?¿*(){}/><]", " ", text2parse).strip('"')
+    parse_list = cleaned_strings.split()
 
-with open(parsed_words_path, 'w', encoding='utf-8') as file:
-    for word in sorted(subset_parsed):
-        file.write(word)
-        file.write('\n')
+    parsed_words = [word for word in parse_list if word.isalpha()]
+    unique_parsed = set(parsed_words)
+    subset_parsed = [word for word in unique_parsed if len(word) >= 3]
+
+    print(f'{len(parsed_words)} words in {text2parse_path}\n'
+          f'{len(unique_parsed)} unique words\n'
+          f'{len(subset_parsed)} unique with 3 or more letters in {parsed_words_path}'
+          )
+
+    with open(parsed_words_path, 'w', encoding='utf-8') as file:
+        for word in sorted(subset_parsed):
+            file.write(word)
+            file.write('\n')
+
+
+if __name__ == "__main__":
+    make_wordlist()

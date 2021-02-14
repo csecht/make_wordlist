@@ -23,18 +23,18 @@ from pathlib import Path
 
 __version__ = 0.1
 
-words2parse_path = Path('parse_this.txt')
+text2parse_path = Path('parse_this.txt')
 parsed_words_path = Path('now_parsed.txt')
 
-text2parse = Path(words2parse_path).read_text()
-clean_words = re.sub("[-:;.'!¡?¿*(){}/><]", ' ', text2parse).strip('"')
-parse_list = clean_words.split()
+text2parse = Path(text2parse_path).read_text()
+cleaned_strings = re.sub("[-:;.'!¡?¿*(){}/><]", ' ', text2parse).strip('"')
+parse_list = cleaned_strings.split()
 
 parsed_words = [word for word in parse_list if word.isalpha()]
 unique_parsed = set(parsed_words)
 subset_parsed = [word for word in unique_parsed if len(word) >= 3]
 
-print(f'{len(parsed_words)} words in {words2parse_path}\n'
+print(f'{len(parsed_words)} words in {text2parse_path}\n'
       f'{len(unique_parsed)} unique words\n'
       f'{len(subset_parsed)} unique with 3 or more letters in {parsed_words_path}'
       )

@@ -18,7 +18,6 @@ before running this script. Output is overwritten to now_parsed.txt.
     You should have received a copy of the GNU General Public License
     along with this program. If not, see https://www.gnu.org/licenses/.
 """
-import re
 from pathlib import Path
 
 __version__ = 0.1
@@ -27,8 +26,7 @@ words2parse_path = Path('parse_this.txt')
 parsed_words_path = Path('now_parsed.txt')
 
 words2parse = Path(words2parse_path).read_text()
-cleaned_words = re.sub("'¡!?/-,;:<>", ' ', words2parse).strip('".()[]{}')
-parse_list = cleaned_words.split()
+parse_list = words2parse.split()
 
 parsed_words = [word for word in parse_list if word.isalpha()]
 unique_parsed = set(parsed_words)

@@ -10,3 +10,6 @@ The source files used for the csecht/passphrase-generate repository are provided
 
 parser.py was written with PyCharm using a Python 3.8 interpreter.
 
+### License
+Copyright (C) 2021 C.S. Echt, GNU General Public License, see https://www.gnu.org/licenses/
+

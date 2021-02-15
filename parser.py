@@ -34,8 +34,7 @@ def make_wordlist() -> None:
     :return: A utf-8, newline-delimited, text file.
     """
     text2parse = Path(text2parse_path).read_text()
-    cleaned_strings = re.sub("[-:;.'!¡?¿*(){}/><]", " ", text2parse).strip('"')
-    parse_list = cleaned_strings.split()
+    parse_list = re.split(r'[\W]+', text2parse)
 
     parsed_words = [word for word in parse_list if word.isalpha()]
     unique_parsed = set(parsed_words)

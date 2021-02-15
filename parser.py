@@ -29,9 +29,9 @@ parsed_words_path = Path('now_parsed.txt')
 
 def make_wordlist() -> None:
     """
-    Create a wordlist text file of unique words from another text file.
+    Create a wordlist of unique words from any source text file.
 
-    :return: A utf-8, newline-delimited, text file.
+    :return: A newline-delimited text file.
     """
     text2parse = Path(text2parse_path).read_text()
     parse_list = re.split(r'[\W]+', text2parse)
@@ -45,6 +45,8 @@ def make_wordlist() -> None:
           f'{len(subset_parsed)} unique with 3 or more letters in {parsed_words_path}'
           )
 
+    # Even though UTF-8 is the default for Python3, it needs to be specified
+    # here to have the file encoding recognized by Windows. Don't know why.
     with open(parsed_words_path, 'w', encoding='utf-8') as file:
         for word in sorted(subset_parsed):
             file.write(word)

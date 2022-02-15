@@ -21,7 +21,7 @@ before running this script. Output is overwritten to now_parsed.txt.
 import re
 from pathlib import Path
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 text2parse_path = Path('parse_this.txt')
 parsed_words_path = Path('now_parsed.txt')
